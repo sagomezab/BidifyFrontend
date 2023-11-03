@@ -1,0 +1,38 @@
+<app-menu></app-menu>
+<div>
+    <div class="text-center" *ngIf="isLogged; else loggedOut">
+        <h2>Ya has iniciado sesión</h2>
+    </div>
+    <ng-template #loggedOut>
+        <section class="sign-in">
+            <div class="container">
+                <div class="signin-content">
+                    <div class="signin-image">
+                        <figure><img src="./assets/signin-image.jpg"></figure>
+                        <a class="signup-image-link" routerLink="/registro" style="font-size: 16px; text-decoration: underline;">Crear Cuenta</a>
+                    </div>
+
+                    <div class="signin-form text-center"> <!-- Añadimos la clase text-center para centrar el contenido -->
+                        <h2 class="form-title">Iniciar Sesión</h2>
+                        <form #f="ngForm" (ngSubmit)="onLogin()" novalidate>
+                            <div class="form-group">
+                                <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="nombreUsuario" id="nombreUsuario" class="form-control"
+                                    [(ngModel)]="nombreUsuario" placeholder="Nombre de Usuario" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" name="password" id="password" class="form-control"
+                                    [(ngModel)]="password" placeholder="Contraseña" required />
+                            </div>
+                            <div class="form-group form-button">
+                                <input type="submit" name="signin" id="signin" class="form-submit" [disabled]="!f.valid"
+                                    value="Iniciar Sesión" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </ng-template>
+</div>

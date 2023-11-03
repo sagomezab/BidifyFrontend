@@ -1,0 +1,18 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div *ngFor="let producto of productos" class="card mb-3 position-relative">
+        <a class="nav-link position-absolute start-0 top-0 m-2" routerLink="/">
+          <i class="fas fa-shopping-bag" style="font-size: 24px;"></i>
+        </a>
+        <div class="card-body text-center">
+            <h5 class="card-title">{{producto.nombre}}</h5>
+            <div class="image-container">
+            <img [src]="producto.img" class="card-img" alt="{{producto.nombre}}">
+        </div>
+          <h6 class="card-subtitle mb-2 text-muted"><strong>Precio:</strong> {{producto.precio}}€</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
