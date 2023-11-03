@@ -10,7 +10,7 @@ import { JwtDTO } from '../models/jwt-dto';
 })
 export class AuthService {
 
-  authURL = 'http://localhost:8080/auth/';
+  authURL = 'http://bidifybackend.azurewebsites.net/auth/';
 
   constructor(private httpClient: HttpClient) { }
 

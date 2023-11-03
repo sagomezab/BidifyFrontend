@@ -8,7 +8,7 @@ import { Producto } from '../models/producto';
 })
 export class ProductoService {
 
-  productoURL = 'http://localhost:8080/producto/';
+  productoURL = 'http://bidifybackend.azurewebsites.net/producto/';
 
   constructor(private httpClient: HttpClient) { }
 

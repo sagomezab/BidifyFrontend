@@ -10,7 +10,7 @@ import { Usuario } from '../models/usuario';
 })
 export class SubastaService {
 
-  subastaURL = 'http://localhost:8080/subasta/';
+  subastaURL = 'http://bidifybackend.azurewebsites.net/subasta/';
 
   constructor(private httpClient: HttpClient) { }
 

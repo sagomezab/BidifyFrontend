@@ -6,7 +6,7 @@ import { Usuario } from '../models/usuario';
   providedIn: 'root'
 })
 export class UsuarioService {
-  baseUrl = "http://localhost:8080";
+  baseUrl = "http://bidifybackend.azurewebsites.net";
 
   constructor(private httpClient: HttpClient) { }
 
