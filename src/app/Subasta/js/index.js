@@ -40,6 +40,15 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(subasta => {
         console.log('Subasta obtenida:', subasta);
         actualizarInterfazConSubasta(subasta);
+        const isSubastador = subasta.subastador.userName === userName;
+
+        if (isSubastador) {
+          const messageForm = document.getElementById('messageForm');
+          messageForm.style.display = 'none';
+        }else{
+          const finalizarButton = document.getElementById('finalizarButton');
+          finalizarButton.style.display = 'none';
+        }
       })
       .catch(error => console.error('Error al obtener la subasta:', error));
 
@@ -61,8 +70,6 @@ document.addEventListener('DOMContentLoaded', function () {
         senderEmail: userName,
         replymessage: msgText
       }));
-      
-      appendMessage('right', 'You', msgText);
       msgerInput.value = '';
     }
   });
