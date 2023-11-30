@@ -2,34 +2,355 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <title>HTML</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./css/styles.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <title>BIDIFY</title>
+
+
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" href="./css/styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"  type="text/css" />
+
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="js/index.js"></script> 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
-  <p id="welcomeMessage"></p>
-  <div class="lista-subastas">
-    <table class="table" id="subastasTable">
-      <thead class="thead-light">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Subastador</th>
-          <th scope="col">Producto</th>
-          <th scope="col">Imagen</th>
-          <th scope="col">Participar</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Las filas se agregarán aquí dinámicamente -->
-      </tbody>
-    </table>
+  <div class="navbar">
+      <div class="navbar_menuicon" id="navicon">
+          <i class="fa fa-navicon"></i>
+      </div>
+      <div class="navbar_logo">
+          <img src="images/logo.png" alt="" />
+      </div>
+      <div class="navbar_page">
+          <span>> BIDIFY</span>
+      </div>
+      <div class="navbar_search">
+      </div>
+      <div class="navbar_icons">
+      </div>
+      <div class="navbar_user" id="profilemodal" style="cursor:pointer">
+          <img src="images/user.jpg" alt="" />
+          <span id="navbar_user_top">Jonh Hamstrong<br><p>User</p></span><i class="fa fa-angle-down"></i>
+      </div>
   </div>
 
-  <button id="cerrarSesion" type="button" class="btn btn-danger"> Cerrar sesión</button>
+  <div class="all">
+
+      <div class="rowfixed"></div>
+      <div class="left_row">
+          <div class="left_row_profile">
+              <img id="portada" src="images/portada.jpg" />
+              <div class="left_row_profile">
+                  <img id="profile_pic" src="images/user.jpg" />
+                  <span>Jonh Hamstrong<br><p>150k followers / 50 follow</p></span>
+              </div>
+          </div>
+          <div class="rowmenu">
+              <ul>
+                  <li><a href="index.html"><i class="fa fa-globe"></i>Nueva </a></li>
+                  <li><a href="index.html"><i class="fa fa-globe"></i>Nueva publicación</a></li>
+                  <li><a href="profile.html"><i class="fa fa-user"></i>Perfil</a></li>
+                  <li><a href="friends.html"><i class="fa fa-users"></i>Amigos</a></li>
+              </ul>
+          </div>
+      </div>
+
+
+
+      <div class="right_row">
+          <div class="row border-radius">
+              <div class="feed">
+                  <div class="feed_title">
+                      <img src="images/user-7.jpg" alt="" />
+                      <span><b>Marina Valentine</b> shared a <a href="">photo</a><br><p>March 2 at 6:05pm</p></span>
+                  </div>
+                  <div class="feed_content">
+                      <div class="feed_content_image">
+                          <img src="images/photo-1.jpg" alt="" />
+                      </div>
+                  </div>
+                  <div class="feed_footer">
+                      <ul class="feed_footer_left">
+                          <li class="hover-orange selected-orange"><i class="fa fa-heart"></i> 22k</li>
+                          <li><span><b>Jimmy, Andrea</b> and 47 more liked this</span></li>
+                      </ul>
+                      <ul class="feed_footer_right">
+                          <li>
+                              <li class="hover-orange selected-orange"><i class="fa fa-share"></i> 7k</li>
+                              <li class="hover-orange"><i class="fa fa-comments-o"></i> 860 comments</li>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+
+
+              <div class="feedcomments">
+                  <ul>
+                      <li>
+                          <div class="feedcomments-user">
+                              <img src="images/user-6.jpg" />
+                              <span><b>Mathilda Brinker</b><br><p>38 mins ago</p></span>
+                          </div>
+                          <div class="feedcomments-comment">
+                              <p>Ratione voluptatem sequi en lod nesciunt. Neque porro quisquam est, quinder dolorem ipsum quia dolor sit amet, consectetur adipisci velit en lorem ipsum duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p>
+                          </div>
+                          <div class="feedcomments-foot">
+                              <i class="fa fa-heart"></i><span>3 likes</span>
+                              <p><a href="#"><i class="fa fa-reply"></i> reply</a></p>
+                          </div>
+                      </li>
+                      <li>
+                          <div class="feedcomments-user">
+                              <img src="images/user.jpg" />
+                              <span><b>Jonh Hamstrong</b><br><p>1 hour ago</p></span>
+                          </div>
+                          <div class="feedcomments-comment">
+                              <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium der doloremque laudantium.</p>
+                          </div>
+                          <div class="feedcomments-foot">
+                              <i class="fa fa-heart"></i><span>44 likes</span>
+                              <p><a href="#"><i class="fa fa-reply"></i> reply</a></p>
+                          </div>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+
+          <center>
+              <a href=""><div class="loadmorefeed">
+                  <i class="fa fa-ellipsis-h"></i>
+              </div></a>
+          </center>
+      </div>
+
+
+      <div class="suggestions_row">
+          
+          <div class="row shadow">
+            <div class="lista-subastas">
+              <table class="table" id="subastasTable">
+                  <thead class="thead-light">
+                      <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Subastador</th>
+                          <th scope="col">Producto</th>
+                          <th scope="col">Imagen</th>
+                          <th scope="col">Participar</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      
+                  </tbody>
+              </table>
+          </div>
+          
+          </div>
+          <div class="row shadow">
+          </div>
+
+
+          <div class="row shadow">
+          </div>
+      </div>
+  </div>
+  <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-arrow-up"></i></button>
+
+
+
+  <!-- Modal Messages -->
+  <div class="modal modal-comments">
+      <div class="modal-icon-select"><i class="fa fa-sort-asc" aria-hidden="true"></i></div>
+      <div class="modal-title">
+          <span>CHAT / MESSAGES</span>
+           <a href="messages.html"><i class="fa fa-ellipsis-h"></i></a>
+      </div>
+      <div class="modal-content">
+          <ul>
+              <li>
+                  <a href="#">
+                      <img src="images/user-7.jpg" alt="" />
+                      <span><b>Diana Jameson</b><br>Hi James! It’s Diana, I just wanted to let you know that we have to reschedule...<p>4 hours ago</p></span>
+                  </a>
+              </li>
+              <li>
+                  <a href="#">
+                      <img src="images/user-6.jpg" alt="" />
+                      <span><b>Elaine Dreyfuss</b><br>We’ll have to check that at the office and see if the client is on board with...<p>Yesterday at 9:56pm</p></span>
+                  </a>
+              </li>
+              <li>
+                  <a href="#">
+                      <img src="images/user-3.jpg" alt="" />
+                      <span><b>Jake Parker</b><br>Great, I’ll see you tomorrow!.<p>4 hours ago</p></span>
+                  </a>
+              </li>
+          </ul>
+      </div>
+  </div>
+  <!-- Modal Friends -->
+  <div class="modal modal-friends">
+      <div class="modal-icon-select"><i class="fa fa-sort-asc" aria-hidden="true"></i></div>
+      <div class="modal-title">
+          <span>FRIEND REQUESTS</span>
+           <a href="friends.html"><i class="fa fa-ellipsis-h"></i></a>
+      </div>
+      <div class="modal-content">
+          <ul>
+              <li>
+                  <a href="#">
+                      <img src="images/user-2.jpg" alt="" />
+                      <span><b>Tony Stevens</b><br>4 Friends in Common</span>
+                      <button class="modal-content-accept">Accept</button><button class="modal-content-decline">Decline</button>
+                  </a>
+              </li>
+              <li>
+                  <a href="#">
+                      <img src="images/user-6.jpg" alt="" />
+                      <span><b>Tamara Romanoff</b><br>2 Friends in Common</span>
+                      <button class="modal-content-accept">Accept</button><button class="modal-content-decline">Decline</button>
+                  </a>
+              </li>
+              <li>
+                  <a href="#">
+                      <img src="images/user-4.jpg" alt="" />
+                      <span><b>Nicholas Grissom</b><br>1 Friend in Common</span>
+                      <button class="modal-content-accept">Accept</button><button class="modal-content-decline">Decline</button>
+                  </a>
+              </li>
+          </ul>
+      </div>
+  </div>
+  <!-- Modal Profile -->
+  <div class="modal modal-profile">
+      <div class="modal-icon-select"><i class="fa fa-sort-asc" aria-hidden="true"></i></div>
+      <div class="modal-title">
+          <span>YOUR ACCOUNT</span>
+           <a href="settings.html"><i class="fa fa-cogs"></i></a>
+      </div>
+      <div class="modal-content">
+          <ul>
+              <li>
+                  <a href="settings.html">
+                      <i class="fa fa-tasks" aria-hidden="true"></i>
+                      <span><b>Profile Settings</b><br>Yours profile settings</span>
+                  </a>
+              </li>
+              <li>
+                  <a href="#">
+                      <i class="fa fa-star-o" aria-hidden="true"></i>
+                      <span><b>Create a page</b><br>Create your page</span>
+                  </a>
+              </li>
+              <li>
+                  <a href="login.html">
+                      <i class="fa fa-power-off" aria-hidden="true"></i>
+                      <span><b>Log Out</b><br>Close your session</span>
+                  </a>
+              </li>
+          </ul>
+      </div>
+  </div>
+  
+  <!-- NavMobile -->
+  <div class="mobilemenu">
+      
+      <div class="mobilemenu_profile">
+          <img id="mobilemenu_portada" src="images/portada.jpg" />
+          <div class="mobilemenu_profile">
+              <img id="mobilemenu_profile_pic" src="images/user.jpg" /><br>
+              <span>Jonh Hamstrong<br><p>150k followers / 50 follow</p></span>
+          </div>
+          <div class="mobilemenu_menu">
+              <ul>
+                  <li><a href="index.html"><i class="fa fa-globe"></i>Newsfeed</a></li>
+                  <li><a href="profile.html"><i class="fa fa-user"></i>Profile</a></li>
+                  <li><a href="friends.html"><i class="fa fa-users"></i>Friends</a></li>
+                  <li><a href="messages.html"><i class="fa fa-comments-o"></i>messages</a></li>
+                  <li class="primarymenu"><i class="fa fa-compass"></i>Explore</li>
+                  <ul class="mobilemenu_child">
+                      <li style="border:none"><a href="#"><i class="fa fa-globe"></i>Activity</a></li>
+                      <li style="border:none"><a href="#"><i class="fa fa-file"></i>Friends</a></li>
+                      <li style="border:none"><a href="#"><i class="fa fa-file"></i>Groups</a></li>
+                      <li style="border:none"><a href="#"><i class="fa fa-file"></i>Pages</a></li>
+                      <li style="border:none"><a href="#"><i class="fa fa-file"></i>Saves</a></li>
+                  </ul>
+                  <li class="primarymenu"><i class="fa fa-user"></i>Rapid Access</li>
+                  <ul class="mobilemenu_child">
+                      <li style="border:none"><a href="#"><i class="fa fa-star-o"></i>Your-Page.html</a></li>
+                      <li style="border:none"><a href="#"><i class="fa fa-star-o"></i>Your-Group.html</a></li>
+                  </ul>
+              </ul>
+                  <hr>
+              <ul>
+                  <li><a href="#">Terms & Conditions</a></li>
+                  <li><a href="#">FAQ's</a></li>
+                  <li><a href="#">Contact</a></li>
+                  <li><a href="login.html">Logout</a></li>
+              </ul>
+          </div>
+      </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+  // Modals
+  $(document).ready(function(){
+
+
+      $("#messagesmodal").hover(function(){
+          $(".modal-comments").toggle();
+      });
+      $(".modal-comments").hover(function(){
+          $(".modal-comments").toggle();
+      });
+
+
+
+      $("#friendsmodal").hover(function(){
+          $(".modal-friends").toggle();
+      });
+      $(".modal-friends").hover(function(){
+          $(".modal-friends").toggle();
+      });
+
+
+      $("#profilemodal").hover(function(){
+          $(".modal-profile").toggle();
+      });
+      $(".modal-profile").hover(function(){
+          $(".modal-profile").toggle();
+      });
+
+
+      $("#navicon").click(function(){
+          $(".mobilemenu").fadeIn();
+      });
+      $(".all").click(function(){
+          $(".mobilemenu").fadeOut();
+      });
+  });
+  </script>
+  <script>
+      window.onscroll = function() {scrollFunction()};
+
+      function scrollFunction() {
+          if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+              document.getElementById("myBtn").style.display = "block";
+          } else {
+              document.getElementById("myBtn").style.display = "none";
+          }
+      }
+
+      function topFunction() {
+          document.body.scrollTop = 0;
+          document.documentElement.scrollTop = 0;
+      }
+  </script>
 </body>
 </html>
