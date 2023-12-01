@@ -7,62 +7,220 @@
   <link rel="stylesheet" href="./css/styles.css">
   <script src="./js/index.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-</head> 
-<body>
-  <div class="product-info" id="container">
-    <table class="product-info-table">
-        <tbody>
-            <tr>
-                <td>
-                    <img src="" alt="Product Image" class="product-image">
-                </td>
-            </tr>
-            <tr>
-                <td class="product-name">Nombre del Producto</td>
-            </tr>
-            <tr>
-                <td class="product-price">Precio del Producto</td>
-            </tr>
-            <tr>
-                <td class="product-owner">Dueño del Producto</td>
-            </tr>
-        </tbody>
-    </table>
-  </div>
-    <section class="msger">
-        <header class="msger-header">
-          <div class="msger-header-title">
-            <i class="fas fa-comment-alt"></i> SUBASTA
-          </div>
-          <div class="msger-header-options">
-            <span><i class="fas fa-cog"></i></span>
-          </div>
-        </header>
-      
-        <main class="msger-chat">
-          
-        </main>
-      
-        <form id="messageForm" class="msger-inputarea">
-          <input type="text" id="messageInput" class="msger-input" placeholder="Enter your message...">
-          <button type="submit" class="msger-send-btn">Send</button>
-        </form>
-    </section>
-    <div class="participant-table">
-      <table class="participant-table">
-          <thead>
-              <tr>
-                  <th>Participantes</th>
-              </tr>
-          </thead>
-          <tbody id="participantsTableBody">
-              <!-- Aquí se agregarán dinámicamente las filas de participantes -->
-          </tbody>
-      </table>
-      <button id="finalizarButton" type="checkbox" class="btn btn-danger btn-finalizar">Finalizar</button>
-    </div>
-  </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"  type="text/css" />
+</head> 
+<body>
+  <div class="navbar">
+      <div class="navbar_logo">
+          <img src="images/logo.png" alt="" />
+      </div>
+      <div class="navbar_page">
+          <span>> BIDIFY</span>
+      </div>
+      <div class="navbar_search">
+      </div>
+      <div class="navbar_icons">
+      </div>
+      <div class="navbar_user" id="profilemodal" style="cursor:pointer">
+      </div>
+  </div>
+
+  <div class="all">
+
+      <div class="rowfixed"></div>
+          <div class="left_row">
+              <div class="card" style="width: 18rem;">
+                  <img src="images/photo-1.jpg" class="product-image card-img-top" alt="...">
+                  <div class="card-body">
+                      <div class="dos_columnas">
+                          <span><b>Producto:</b></span>
+                          <p class="product-name card-text"></p>
+                      </div>
+                      <div class="dos_columnas">
+                          <span><b>Precio:</b></span>
+                          <p class="product-price card-text"></p>
+                      </div>
+                      <div class="dos_columnas">
+                          <span><b>Dueño:</b></span>
+                          <p class="product-owner card-text"></p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+
+
+      <div class="right_row">
+          <div class="row border-radius">
+              <div class="feed">
+                      <section class="msger">
+                          <header class="msger-header">
+                            <div class="msger-header-title">
+                              <i class="fas fa-comment-alt"></i> SUBASTA
+                            </div>
+                            <div class="msger-header-options">
+                              <span><i class="fas fa-cog"></i></span>
+                            </div>
+                          </header>
+                          <main class="msger-chat">
+                          </main>
+                          <form id="messageForm" class="msger-inputarea">
+                            <input type="text" id="messageInput" class="msger-input" placeholder="Enter your message...">
+                            <button type="submit" class="btn btn-outline-success">Send</button>
+                          </form>
+                      </section>
+              </div>
+          </div>
+      </div>
+
+
+      <div class="suggestions_row">
+          <div class="row shadow">
+            <div>
+              <table class="table" id="Ganador">
+                  <thead class="thead-light">
+                      <tr>
+                          <th scope="col">Ganador</th>
+                          <th scope="col">Monto</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <td>{Nombre ganador}</td>
+                      <td>{Monto}</td>
+                  </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row shadow">
+              <div class="lista-subastas">
+                  <table class="table" id="subastasTable">
+                      <thead class="thead-light">
+                          <tr>
+                              <th scope="col" class="align-center">Participantes</th>
+                          </tr>
+                      </thead>
+                      <tbody id="participantsTableBody">
+                          <tr class="align-center">
+                              <td>Subastador de prueba</td>
+                          </tr>
+                          <tr class="align-center">
+                              <td>Subastador de prueba</td>
+                          </tr>
+                          <tr class="align-center">
+                              <td>Subastador de prueba</td>
+                          </tr>
+                          <tr class="align-center">
+                              <td>Subastador de prueba</td>
+                          </tr>
+                          <tr class="align-center">
+                              <td>Subastador de prueba</td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          <button id="finalizarButton" type="button" class="btn btn-danger btn-finalizar">Finalizar</button>
+      </div>
+  </div>
+  
+
+
+
+  <!-- Modal Messages -->
+  <div class="modal modal-comments">
+      <div class="modal-icon-select"><i class="fa fa-sort-asc" aria-hidden="true"></i></div>
+      <div class="modal-title">
+          <span>CHAT / MESSAGES</span>
+           <a href="messages.html"><i class="fa fa-ellipsis-h"></i></a>
+      </div>
+      <div class="modal-content">
+          <ul>
+              <li>
+                  <a href="#">
+                      <img src="images/user-7.jpg" alt="" />
+                      <span><b>Diana Jameson</b><br>Hi James! It’s Diana, I just wanted to let you know that we have to reschedule...<p>4 hours ago</p></span>
+                  </a>
+              </li>
+              <li>
+                  <a href="#">
+                      <img src="images/user-6.jpg" alt="" />
+                      <span><b>Elaine Dreyfuss</b><br>We’ll have to check that at the office and see if the client is on board with...<p>Yesterday at 9:56pm</p></span>
+                  </a>
+              </li>
+              <li>
+                  <a href="#">
+                      <img src="images/user-3.jpg" alt="" />
+                      <span><b>Jake Parker</b><br>Great, I’ll see you tomorrow!.<p>4 hours ago</p></span>
+                  </a>
+              </li>
+          </ul>
+      </div>
+  </div>
+  <!-- Modal Friends -->
+  <div class="modal modal-friends">
+      <div class="modal-icon-select"><i class="fa fa-sort-asc" aria-hidden="true"></i></div>
+      <div class="modal-title">
+          <span>FRIEND REQUESTS</span>
+           <a href="friends.html"><i class="fa fa-ellipsis-h"></i></a>
+      </div>
+      <div class="modal-content">
+          <ul>
+              <li>
+                  <a href="#">
+                      <img src="images/user-2.jpg" alt="" />
+                      <span><b>Tony Stevens</b><br>4 Friends in Common</span>
+                      <button class="modal-content-accept">Accept</button><button class="modal-content-decline">Decline</button>
+                  </a>
+              </li>
+              <li>
+                  <a href="#">
+                      <img src="images/user-6.jpg" alt="" />
+                      <span><b>Tamara Romanoff</b><br>2 Friends in Common</span>
+                      <button class="modal-content-accept">Accept</button><button class="modal-content-decline">Decline</button>
+                  </a>
+              </li>
+              <li>
+                  <a href="#">
+                      <img src="images/user-4.jpg" alt="" />
+                      <span><b>Nicholas Grissom</b><br>1 Friend in Common</span>
+                      <button class="modal-content-accept">Accept</button><button class="modal-content-decline">Decline</button>
+                  </a>
+              </li>
+          </ul>
+      </div>
+  </div>
+  <!-- Modal Profile -->
+  <div class="modal modal-profile">
+      <div class="modal-icon-select"><i class="fa fa-sort-asc" aria-hidden="true"></i></div>
+      <div class="modal-title">
+          <span>YOUR ACCOUNT</span>
+           <a href="settings.html"><i class="fa fa-cogs"></i></a>
+      </div>
+      <div class="modal-content">
+          <ul>
+              <li>
+                  <a href="settings.html">
+                      <i class="fa fa-tasks" aria-hidden="true"></i>
+                      <span><b>Profile Settings</b><br>Yours profile settings</span>
+                  </a>
+              </li>
+              <li>
+                  <a href="#">
+                      <i class="fa fa-star-o" aria-hidden="true"></i>
+                      <span><b>Create a page</b><br>Create your page</span>
+                  </a>
+              </li>
+              <li>
+                  <a href="login.html">
+                      <i class="fa fa-power-off" aria-hidden="true"></i>
+                      <span><b>Log Out</b><br>Close your session</span>
+                  </a>
+              </li>
+          </ul>
+      </div>
+  </div>
 </body>
 </html>
