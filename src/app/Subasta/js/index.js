@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
+  document.body.classList.add('loaded');
+  
   const subastaId = obtenerSubastaIdDesdeUrl();
   const socket = new SockJS('http://localhost:8080/stompendpoint');
   const stompClient = Stomp.over(socket);

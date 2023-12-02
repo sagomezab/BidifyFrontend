@@ -2,6 +2,7 @@
 * {
   margin: 0;
   padding: 0;
+  transition: all 0.7s ease;
 }
 
 a {
@@ -26,6 +27,17 @@ body {
   height: 100%;
   overflow-y: auto;
 }
+
+
+body {
+  opacity: 0;
+}
+
+body.loaded {
+  opacity: 1;
+}
+
+
 
 /* Personalizado */
 .border-radius {
@@ -52,7 +64,7 @@ body {
 .navbar {
   height: 50px;
   width: 100%;
-  background-color: #3f4257;
+  background-color: #505BDA;
   color: white;
   display: flex;
   align-items: center;
@@ -73,7 +85,7 @@ body {
 .navbar_page {
   height: 50px;
   text-align: center;
-  background-color: #4f5266;
+  background-color: #505BDA;
   padding-left: 30px;
   padding-right: 30px;
 }
@@ -1383,9 +1395,9 @@ text-align: center; /* Centra el texto del párrafo */
 .btn-danger {
 display: block;
 margin: 0 auto;
-background-color: #dc3545;
+background-color: #7F8CDE;
 color: #fff;
-border-color: #dc3545;
+border-color: #7F8CDE;
 border-radius: 0.25rem;
 font-size: 1rem;
 font-weight: 500;
@@ -1397,7 +1409,7 @@ height: 40px;
 }
 
 .btn-danger:hover {
-background-color: #e54c60;
+background-color: #505BDA;
 color: #fff;
 }
 
@@ -1410,15 +1422,15 @@ box-shadow: 0 0 0 0.2rem rgba(220, 63, 69, 0.5);
 margin-left: 0.2rem;
 margin-right: 0.2rem;
 background-color: transparent;
-color: #28a745;
-border: 1px solid #28a745;
+color: #9168D0;
+border: 1px solid #9168D0;
 border-radius: 4px;
 padding: 10px 20px;
 font-size: 16px;
 cursor: pointer;
 
 &:hover {
-  background-color: #28a745;
+  background-color: #505BDA;
   color: #fff;
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
