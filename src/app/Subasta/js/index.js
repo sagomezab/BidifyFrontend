@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+  document.body.classList.add('loaded');
   
   const subastaId = obtenerSubastaIdDesdeUrl();
   const socket = new SockJS('http://localhost:8080/stompendpoint');
@@ -128,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
     participantsTableBody.innerHTML = '';
 
     subasta.oferentes.forEach(participant => {
-      participantsTableBody.innerHTML += `<tr><td>${participant.nombre}</td></tr>`;
+      participantsTableBody.innerHTML += `<tr class="align-center" ><td>${participant.nombre}</td></tr>`;
     });
   }
 

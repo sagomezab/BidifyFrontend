@@ -1,3 +1,6 @@
+document.addEventListener('DOMContentLoaded', function () {
+  document.body.classList.add('loaded');
+});
 function cargarSubastas() {
   fetch('http://localhost:8080/subasta')
     .then(response => response.json())

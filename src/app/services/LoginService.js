@@ -13,7 +13,9 @@ document.addEventListener('DOMContentLoaded', function () {
         container.classList.remove('right-panel-active');
     });
 
-    registrarButton.addEventListener('click', function () {
+    registrarButton.addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent default form submission
+
         const nombre = document.getElementById('nombre').value;
         const nombreUsuario = document.getElementById('nombreUsuarioRegistrar').value;
         const correo = document.getElementById('correo').value;
@@ -41,7 +43,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    ingresarButton.addEventListener('click', function () {
+    ingresarButton.addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent default form submission
+
         const nombreUsuarioLogin = document.getElementById('nombreUsuarioLogin').value;
         const contraseñaLogin = document.getElementById('contraseñaLogin').value;
 
@@ -55,7 +59,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 password: contraseñaLogin
             }),
             success: function (response) {
-                
                 localStorage.setItem('userName', nombreUsuarioLogin);
                 window.location.href = '../Feed/index.html';
             },
