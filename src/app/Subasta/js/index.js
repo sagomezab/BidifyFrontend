@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function () {
       
       stompClient.subscribe('/topic/subasta/' + subastaId + '/actualizacion', function (message) {
         const subastaActualizada = JSON.parse(message.body);
-        console.log('Subasta Actualizada:', subastaActualizada);
         actualizarInterfazConSubasta(subastaActualizada);
       });
 
@@ -21,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function () {
         try {
           const response = JSON.parse(message.body);
           mostrarMensajesEnInterfaz();
-          console.log('Mensaje añadido', response);
         } catch (error) {
           console.error('Error al analizar el mensaje JSON:', error);
         }
@@ -29,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
       stompClient.subscribe('/topic/subasta/' + subastaId + '/finalizar', function (message) {
         const subastaFinalizada = JSON.parse(message.body);
-        console.log('Subasta Finalizada:', subastaFinalizada);
         // Agregar lógica para manejar la finalización de la subasta en la interfaz
       });
     });
@@ -38,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
     fetch(`http://localhost:8080/subasta/${subastaId}`)
       .then(response => response.json())
       .then(subasta => {
-        console.log('Subasta obtenida:', subasta);
         actualizarInterfazConSubasta(subasta);
         const isSubastador = subasta.subastador.userName === userName;
 
