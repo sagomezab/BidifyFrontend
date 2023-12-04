@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('loaded');
   const signUpButton = document.querySelector('#signUp');
   const signInButton = document.querySelector('#signIn');
   const container = document.querySelector('#main-container'); 
