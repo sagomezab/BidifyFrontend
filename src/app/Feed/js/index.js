@@ -1,6 +1,32 @@
 document.addEventListener('DOMContentLoaded', function () {
   document.body.classList.add('loaded');
+  const socket = new SockJS('http://localhost:8080/stompendpoint');
+  const stompClient = Stomp.over(socket);
+  const userName = localStorage.getItem('userName');
+
+  try {
+      stompClient.connect({}, function (frame) {
+      console.log('Connected: ' + frame);
+
+      stompClient.subscribe('/topic/subasta/crear', function (message) {
+        const subastaCreada = JSON.parse(message.body);
+        cargarSubastas();
+
+      });
+
+    });
+
+  } catch (error) {
+    console.error('Error en el código:', error);
+  }
 });
+
+function crearSubasta(){
+  stompClient.send('/app/subasta/crear', {}, JSON.stringify({
+    //aquí metan la estructura del bicho ese 
+  }));
+}
+
 function cargarSubastas() {
   fetch('http://localhost:8080/subasta')
     .then(response => response.json())
