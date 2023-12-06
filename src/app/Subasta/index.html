@@ -15,7 +15,7 @@
 <body>
   <div class="navbar">
       <div class="navbar_logo">
-          <img src="images/logo.png" alt="" />
+          <img src="" alt="" />
       </div>
       <div class="navbar_page">
           <span>> BIDIFY</span>
@@ -33,18 +33,18 @@
       <div class="rowfixed"></div>
           <div class="left_row">
               <div class="card" style="width: 18rem;">
-                  <img src="images/photo-1.jpg" class="product-image card-img-top" alt="...">
+                  <img src="" class="product-image card-img-top" alt="...">
                   <div class="card-body">
                       <div class="dos_columnas">
                           <span><b>Producto:</b></span>
                           <p class="product-name card-text"></p>
                       </div>
                       <div class="dos_columnas">
-                          <span><b>Precio:</b></span>
+                          <span><b>Precio Base:</b></span>
                           <p class="product-price card-text"></p>
                       </div>
                       <div class="dos_columnas">
-                          <span><b>Dueño:</b></span>
+                          <span><b>Subastador:</b></span>
                           <p class="product-owner card-text"></p>
                       </div>
                   </div>
@@ -88,8 +88,8 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <td>{Nombre ganador}</td>
-                      <td>{Monto}</td>
+                      <td id = "ganador">{Nombre ganador}</td>
+                      <td id = "monto">{Monto}</td>
                   </tbody>
               </table>
             </div>
@@ -123,104 +123,15 @@
               </div>
           </div>
           <button id="finalizarButton" type="button" class="btn btn-danger btn-finalizar">Finalizar</button>
+
+          <button id="iniciarButton" type="button" class="btn btn-danger btn-finalizar">Iniciar</button>
       </div>
   </div>
   
 
 
 
-  <!-- Modal Messages -->
-  <div class="modal modal-comments">
-      <div class="modal-icon-select"><i class="fa fa-sort-asc" aria-hidden="true"></i></div>
-      <div class="modal-title">
-          <span>CHAT / MESSAGES</span>
-           <a href="messages.html"><i class="fa fa-ellipsis-h"></i></a>
-      </div>
-      <div class="modal-content">
-          <ul>
-              <li>
-                  <a href="#">
-                      <img src="images/user-7.jpg" alt="" />
-                      <span><b>Diana Jameson</b><br>Hi James! It’s Diana, I just wanted to let you know that we have to reschedule...<p>4 hours ago</p></span>
-                  </a>
-              </li>
-              <li>
-                  <a href="#">
-                      <img src="images/user-6.jpg" alt="" />
-                      <span><b>Elaine Dreyfuss</b><br>We’ll have to check that at the office and see if the client is on board with...<p>Yesterday at 9:56pm</p></span>
-                  </a>
-              </li>
-              <li>
-                  <a href="#">
-                      <img src="images/user-3.jpg" alt="" />
-                      <span><b>Jake Parker</b><br>Great, I’ll see you tomorrow!.<p>4 hours ago</p></span>
-                  </a>
-              </li>
-          </ul>
-      </div>
-  </div>
-  <!-- Modal Friends -->
-  <div class="modal modal-friends">
-      <div class="modal-icon-select"><i class="fa fa-sort-asc" aria-hidden="true"></i></div>
-      <div class="modal-title">
-          <span>FRIEND REQUESTS</span>
-           <a href="friends.html"><i class="fa fa-ellipsis-h"></i></a>
-      </div>
-      <div class="modal-content">
-          <ul>
-              <li>
-                  <a href="#">
-                      <img src="images/user-2.jpg" alt="" />
-                      <span><b>Tony Stevens</b><br>4 Friends in Common</span>
-                      <button class="modal-content-accept">Accept</button><button class="modal-content-decline">Decline</button>
-                  </a>
-              </li>
-              <li>
-                  <a href="#">
-                      <img src="images/user-6.jpg" alt="" />
-                      <span><b>Tamara Romanoff</b><br>2 Friends in Common</span>
-                      <button class="modal-content-accept">Accept</button><button class="modal-content-decline">Decline</button>
-                  </a>
-              </li>
-              <li>
-                  <a href="#">
-                      <img src="images/user-4.jpg" alt="" />
-                      <span><b>Nicholas Grissom</b><br>1 Friend in Common</span>
-                      <button class="modal-content-accept">Accept</button><button class="modal-content-decline">Decline</button>
-                  </a>
-              </li>
-          </ul>
-      </div>
-  </div>
   <!-- Modal Profile -->
-  <div class="modal modal-profile">
-      <div class="modal-icon-select"><i class="fa fa-sort-asc" aria-hidden="true"></i></div>
-      <div class="modal-title">
-          <span>YOUR ACCOUNT</span>
-           <a href="settings.html"><i class="fa fa-cogs"></i></a>
-      </div>
-      <div class="modal-content">
-          <ul>
-              <li>
-                  <a href="settings.html">
-                      <i class="fa fa-tasks" aria-hidden="true"></i>
-                      <span><b>Profile Settings</b><br>Yours profile settings</span>
-                  </a>
-              </li>
-              <li>
-                  <a href="#">
-                      <i class="fa fa-star-o" aria-hidden="true"></i>
-                      <span><b>Create a page</b><br>Create your page</span>
-                  </a>
-              </li>
-              <li>
-                  <a href="login.html">
-                      <i class="fa fa-power-off" aria-hidden="true"></i>
-                      <span><b>Log Out</b><br>Close your session</span>
-                  </a>
-              </li>
-          </ul>
-      </div>
-  </div>
+  
 </body>
 </html>

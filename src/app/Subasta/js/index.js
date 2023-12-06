@@ -1,17 +1,19 @@
 document.addEventListener('DOMContentLoaded', function () {
   document.body.classList.add('loaded');
-  
+
   const subastaId = obtenerSubastaIdDesdeUrl();
   const socket = new SockJS('http://localhost:8080/stompendpoint');
   const stompClient = Stomp.over(socket);
   const userName = localStorage.getItem('userName');
+  let chatHabilitado = false;
+  let isSubastador = false;
+  let precioActual;
   mostrarMensajesEnInterfaz();
 
   try {
     stompClient.connect({}, function (frame) {
       console.log('Connected: ' + frame);
-      
-      
+
       stompClient.subscribe('/topic/subasta/' + subastaId + '/actualizacion', function (message) {
         const subastaActualizada = JSON.parse(message.body);
         actualizarInterfazConSubasta(subastaActualizada);
@@ -21,14 +23,32 @@ document.addEventListener('DOMContentLoaded', function () {
         try {
           const response = JSON.parse(message.body);
           mostrarMensajesEnInterfaz();
+          actualizarInterfazConSubasta(response);
+          precioActual = response.precioFinal;
         } catch (error) {
           console.error('Error al analizar el mensaje JSON:', error);
         }
       });
-
+      stompClient.subscribe('/topic/subasta/' + subastaId + '/obtener', function (message) {
+        try {
+          const response = JSON.parse(message.body);
+          mostrarMensajesEnInterfaz();
+          actualizarInterfazConSubasta(response);
+          precioActual = response.precioFinal;
+        } catch (error) {
+          console.error('Error al analizar el mensaje JSON:', error);
+        }
+      });
       stompClient.subscribe('/topic/subasta/' + subastaId + '/finalizar', function (message) {
         const subastaFinalizada = JSON.parse(message.body);
-        // Agregar lógica para manejar la finalización de la subasta en la interfaz
+        actualizarInterfazConSubasta(subastaFinalizada);
+        actualizarEstadoChat(false);
+      });
+
+      stompClient.subscribe('/topic/subasta/' + subastaId + '/iniciar', function (message) {
+        const subastaIniciada = JSON.parse(message.body);
+        precioActual = subastaIniciada.precioFinal;
+        actualizarEstadoChat(true);
       });
     });
 
@@ -37,14 +57,18 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(response => response.json())
       .then(subasta => {
         actualizarInterfazConSubasta(subasta);
-        const isSubastador = subasta.subastador.userName === userName;
-
+        isSubastador = subasta.subastador.userName === userName;
+        precioActual = subasta.precioFinal;
+        const finalizarButton = document.getElementById('finalizarButton');
+        finalizarButton.style.display = 'none';
+        const messageForm = document.getElementById('messageForm');
+        messageForm.style.display = 'none';
         if (isSubastador) {
-          const messageForm = document.getElementById('messageForm');
-          messageForm.style.display = 'none';
-        }else{
-          const finalizarButton = document.getElementById('finalizarButton');
-          finalizarButton.style.display = 'none';
+          
+        } else {
+          const iniciarButton = document.getElementById('iniciarButton');
+          iniciarButton.style.display = 'none';
+          
         }
       })
       .catch(error => console.error('Error al obtener la subasta:', error));
@@ -52,28 +76,74 @@ document.addEventListener('DOMContentLoaded', function () {
   } catch (error) {
     console.error('Error en el código:', error);
   }
+  
 
   const msgerForm = document.getElementById("messageForm");
   const msgerInput = document.getElementById("messageInput");
   const msgerChat = document.querySelector(".msger-chat");
+  const finalizar = document.getElementById('finalizarButton');
+  const iniciar = document.getElementById('iniciarButton');
+  var valorOriginalDisplay = finalizarButton.style.display;
+  var ValorOriginalChat = msgerForm.style.display;
+  msgerInput.addEventListener("input", function (event) {
+    let inputValue = event.target.value.trim();
+    inputValue = inputValue.replace(/[^\d]/g, '');
+    const formattedNumber = formatNumber(parseInt(inputValue));
+    msgerInput.value = formattedNumber;
+  });
 
   msgerForm.addEventListener("submit", function (event) {
     event.preventDefault();
     const msgText = msgerInput.value.trim();
-    
-    if (msgText !== '') {
-      // Aquí puedes enviar mensajes al servidor a través de WebSocket
+    const bidAmount = parseInt(msgText.replace(/[^\d]/g, ''));
+    if (bidAmount >= precioActual) {
       stompClient.send('/app/' + subastaId + '/messages', {}, JSON.stringify({
         senderEmail: userName,
-        replymessage: msgText
+        replymessage: parseInt(msgText.replace(/[^\d]/g, '')) 
       }));
+      
       msgerInput.value = '';
-    }
+    } else {
+      alert("Solo se pueden ofertar valores mayores a la oferta actual");
+  }
+    
+    
   });
-
+  finalizar.addEventListener('click', function (event){
+    finalizarSubasta();
+  });
+  iniciar.addEventListener('click', function (event){
+    iniciarSubasta();
+  });
+  
+  function finalizarSubasta() {
+    const subastaId = obtenerSubastaIdDesdeUrl();
+    finalizarButton.disabled = true;
+    finalizarButton.style.display = 'none';
+    stompClient.send('/app/' + subastaId + '/finalizar', {});
+    
+  }
+  function iniciarSubasta() {
+    const subastaId = obtenerSubastaIdDesdeUrl();
+    iniciarButton.disabled = true;
+    iniciarButton.style.display = 'none';
+    finalizarButton.style.display = valorOriginalDisplay;
+    stompClient.send('/app/' + subastaId + '/iniciar', {});
+    
+  }
+  function formatNumber(number) {
+    return '$' + (isNaN(number) ? '0' : new Intl.NumberFormat('es-ES').format(number));
+  }
+  function actualizarEstadoChat(estado) {
+    chatHabilitado = estado;
+    const messageForm = document.getElementById('messageForm');
+    messageForm.style.display = chatHabilitado && !isSubastador ? ValorOriginalChat : 'none';
+    
+  }
   function mostrarMensajesEnInterfaz() {
     const msgerChat = document.querySelector(".msger-chat");
-    msgerChat.innerHTML = ''; // Limpiar el contenido actual
+    msgerChat.innerHTML = '';
+    
     fetch(`http://localhost:8080/subasta/${subastaId}/messages`)
       .then(response => response.json())
       .then(messages => {
@@ -83,11 +153,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       })
       .catch(error => console.error('Error al obtener mensajes:', error));
-  
-    
   }
 
   function appendMessage(side, name, text) {
+    const formattedNumber = formatNumber(parseInt(text));
     const msgHTML = `
       <div class="msg ${side}-msg">
         <div class="msg-bubble">
@@ -95,11 +164,11 @@ document.addEventListener('DOMContentLoaded', function () {
             <div class="msg-info-name">${name}</div>
             <div class="msg-info-time">${formatDate(new Date())}</div>
           </div>
-          <div class="msg-text">${text}</div>
+          <div class="msg-text">Yo ofrezco: ${formattedNumber}</div>
         </div>
       </div>
     `;
-
+  
     msgerChat.insertAdjacentHTML("beforeend", msgHTML);
     msgerChat.scrollTop = msgerChat.scrollHeight;
   }
@@ -107,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function obtenerSubastaIdDesdeUrl() {
     const urlParams = new URLSearchParams(window.location.search);
     const subastaId = urlParams.get('id');
-    
+
     if (subastaId && !isNaN(subastaId)) {
       return parseInt(subastaId);
     } else {
@@ -115,12 +184,25 @@ document.addEventListener('DOMContentLoaded', function () {
       return null;
     }
   }
-
+  
   function actualizarInterfazConSubasta(subasta) {
     document.querySelector('.product-name').textContent = subasta.producto.nombre;
-    document.querySelector('.product-price').textContent = "Precio: " + subasta.precioFinal;
-    document.querySelector('.product-owner').textContent = "Dueño: " + subasta.subastador.nombre;
+    document.querySelector('.product-price').textContent = formatNumber(subasta.precioFinal);
+    document.querySelector('.product-owner').textContent = subasta.subastador.nombre;
+    var ganadorElement = document.getElementById("ganador");
+    var montoElement = document.getElementById("monto");
+    if (ganadorElement && montoElement) {
+      try{
+        ganadorElement.textContent = subasta.ganador.userName;
+        montoElement.textContent = formatNumber(subasta.precioFinal);
+      }catch(error){
+        ganadorElement.textContent = '';
+        montoElement.textContent = '';
+      }
+      
+    }
 
+   
     const productImage = document.querySelector('.product-image');
     productImage.src = subasta.producto.img;
     productImage.alt = "Imagen de la subasta";
