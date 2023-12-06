@@ -3,9 +3,12 @@ document.addEventListener('DOMContentLoaded', function () {
   const socket = new SockJS('http://localhost:8080/stompendpoint');
   const stompClient = Stomp.over(socket);
   const userName = localStorage.getItem('userName');
-
+  var nombreUsuarioSpan = document.getElementById('NombreUuario');
+  if (userName) {
+    nombreUsuarioSpan.textContent = userName;
+  }
   try {
-      stompClient.connect({}, function (frame) {
+    stompClient.connect({}, function (frame) {
       console.log('Connected: ' + frame);
 
       stompClient.subscribe('/topic/subasta/crear', function (message) {
@@ -14,14 +17,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
       });
 
-    });
+  var botonCerrarSesion = document.getElementById('cerrar_sesion');
+  botonCerrarSesion.addEventListener("click", function() {
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location.href = "../Login/index.html";
+  });
+
+
+});
 
   } catch (error) {
     console.error('Error en el código:', error);
   }
+
+  var botonCerrarSesion = document.getElementById('cerrar_sesion');
 });
 
-function crearSubasta(){
+
+function crearSubasta() {
   stompClient.send('/app/subasta/crear', {}, JSON.stringify({
     //aquí metan la estructura del bicho ese 
   }));
@@ -31,14 +45,14 @@ function cargarSubastas() {
   fetch('http://localhost:8080/subasta')
     .then(response => response.json())
     .then(subastas => {
-      
+
       const tabla = document.getElementById('subastasTable');
       const tbody = tabla.querySelector('tbody');
 
-      
+
       tbody.innerHTML = '';
 
-      
+
       subastas.forEach((subasta, index) => {
         const fila = `
           <tr>
@@ -46,7 +60,7 @@ function cargarSubastas() {
             <td>${subasta.subastador.nombre}</td>
             <td>${subasta.producto.nombre}</td>
             <td><img src="${subasta.producto.img}" alt="Imagen de la subasta" class = "imagen-lista"></td>
-            <td><button type="button" class="button-33" onclick="unirseASubasta(${subasta.id})">unirse</button></td>
+            <td><button type="button" class="button-table" onclick="unirseASubasta(${subasta.id})">unirse</button></td>
           </tr>
         `;
         tbody.innerHTML += fila;

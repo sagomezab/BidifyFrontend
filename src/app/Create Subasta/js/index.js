@@ -33,42 +33,57 @@ function cargarProductos() {
 }
 
 function seleccionarProducto(id, nombre, precio, img) {
-    const confirmacion = confirm(`¿Estás seguro de que deseas subastar el producto "${nombre}"?`);
-    
-    if (confirmacion) {
-        const usuarioPromise = fetch('http://localhost:8080/usuario/info/' + userName)
-            .then(response => response.json())
-            .catch(error => {
-                console.error('Error al obtener información del usuario:', error);
-                throw error;
-            });
+    Swal.fire({
+        text: `¿Estás seguro de que deseas subastar el producto "${nombre}"?`,
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, estoy seguro',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const usuarioPromise = fetch('http://localhost:8080/usuario/info/' + userName)
+                .then(response => response.json())
+                .catch(error => {
+                    console.error('Error al obtener información del usuario:', error);
+                    throw error;
+                });
 
-        Promise.all([usuarioPromise])
-            .then(([usuario]) => {
-                const productoSeleccionado = {
-                    id: id,
-                    nombre: nombre,
-                    precio: precio,
-                    img: img
-                };
-                const subastaData = {
-                    subastador: usuario,
-                    producto: productoSeleccionado,
-                    precioInicial: precio,
-                    estado: true,
-                    cantidadDeOfertantes: 0,
-                    oferentes: [],
-                    precioFinal: null,
-                    ganador: null,
-                    messageList: [],
-                };
-                stompClient.send('/app/subasta/crear', {}, JSON.stringify(subastaData));
-            })
-            .catch(error => {
-                console.error('Error al obtener información del usuario:', error);
-            });
-    }
+            Promise.all([usuarioPromise])
+                .then(([usuario]) => {
+                    const productoSeleccionado = {
+                        id: id,
+                        nombre: nombre,
+                        precio: precio,
+                        img: img
+                    };
+                    const subastaData = {
+                        subastador: usuario,
+                        producto: productoSeleccionado,
+                        precioInicial: precio,
+                        estado: true,
+                        cantidadDeOfertantes: 0,
+                        oferentes: [],
+                        precioFinal: null,
+                        ganador: null,
+                        messageList: [],
+                    };
+
+                    // Realizar el envío de la subasta
+                    stompClient.send('/app/subasta/crear', {}, JSON.stringify(subastaData));
+
+                    // Después de enviar la subasta, redirigir
+                    window.location.href = "../Feed/index.html";
+                })
+                .catch(error => {
+                    console.error('Error al obtener información del usuario:', error);
+                });
+        } else {
+            console.log("Operación cancelada");
+        }
+    });
 }
+
 
 function crearTarjetas(productos) {
     var container = document.getElementById('albumContainer');
