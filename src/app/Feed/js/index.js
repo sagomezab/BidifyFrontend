@@ -1,42 +1,43 @@
 document.addEventListener('DOMContentLoaded', function () {
+
+  var crearProductoElement = document.getElementById('crearProducto');
+  crearProductoElement.addEventListener('click', function () {
+    document.querySelector('[data-bs-target="#Modal"]').click();
+  });
+
   document.body.classList.add('loaded');
   const socket = new SockJS('http://localhost:8080/stompendpoint');
-  const stompClient = Stomp.over(socket);
+  const stompClient2 = Stomp.over(socket);
   const userName = localStorage.getItem('userName');
   var nombreUsuarioSpan = document.getElementById('NombreUuario');
   if (userName) {
     nombreUsuarioSpan.textContent = userName;
   }
   try {
-    stompClient.connect({}, function (frame) {
+    stompClient2.connect({}, function (frame) {
       console.log('Connected: ' + frame);
 
-      stompClient.subscribe('/topic/subasta/crear', function (message) {
+      stompClient2.subscribe('/topic/subasta/crear', function (message) {
         const subastaCreada = JSON.parse(message.body);
         cargarSubastas();
 
       });
-
-  var botonCerrarSesion = document.getElementById('cerrar_sesion');
-  botonCerrarSesion.addEventListener("click", function() {
-    localStorage.clear();
-    sessionStorage.clear();
-    window.location.href = "../Login/index.html";
-  });
-
-
-});
-
+    });
   } catch (error) {
     console.error('Error en el código:', error);
   }
 
   var botonCerrarSesion = document.getElementById('cerrar_sesion');
+      botonCerrarSesion.addEventListener("click", function () {
+        localStorage.clear();
+        sessionStorage.clear();
+        window.location.href = "../Login/index.html";
+      });
+
 });
 
-
 function crearSubasta() {
-  stompClient.send('/app/subasta/crear', {}, JSON.stringify({
+  stompClient2.send('/app/subasta/crear', {}, JSON.stringify({
     //aquí metan la estructura del bicho ese 
   }));
 }
@@ -69,8 +70,10 @@ function cargarSubastas() {
     .catch(error => console.error('Error al obtener las subastas:', error));
 }
 function unirseASubasta(subastaId) {
+  stompClient.send('/app/' + subastaId + '/' + userName + '/unirse', {});
   window.location.href = `../Subasta/index.html?id=${subastaId}`;
 }
+
 function cargarProductos() {
   fetch('http://localhost:8080/usuario/productos/todos')
     .then(response => response.json())

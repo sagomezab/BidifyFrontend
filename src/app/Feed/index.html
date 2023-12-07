@@ -6,18 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>BIDIFY</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="icon" href="../Resources/img/Logo.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="./css/styles.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-        type="text/css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+    <script src="../Subasta/js/index.js"></script>
     <script src="js/index.js"></script>
+    <script src="js/crearProducto.js"></script>
 
 </head>
 
@@ -34,9 +36,9 @@
         <div class="navbar_search">
         </div>
         <div class="navbar_icons">
+            <button class="button-33" id="cerrar_sesion">Cerrar sesión</button>
         </div>
         <div class="navbar_user">
-            <button class="button-33" id="cerrar_sesion">Cerrar sesión</button>
         </div>
     </div>
 
@@ -53,12 +55,11 @@
             <div class="rowmenu border-radius">
                 <ul>
                     <li><a href="../Create Subasta/index.html"><i class="border-radius"></i>Crear subasta</a></li>
-                    <li><a href=""><i class="border-radius"></i>Crear Producto</a></li>
+                    <li><a id="crearProducto" data-bs-toggle="modal" data-bs-target="#Modal"><i
+                                class="border-radius"></i>Crear Producto</a></li>
                 </ul>
             </div>
         </div>
-
-
 
         <div class="right_row">
             <div class="row border-radius">
@@ -109,6 +110,45 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Crear producto</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="nombreProducto" class="form-control" placeholder="Nombre producto"
+                        aria-label="Username" aria-describedby="basic-addon1" required>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="precioProducto" placeholder="Precio"
+                            aria-label="Amount (to the nearest dollar)" oninput="formatoPesos(this)" required>
+                        <span class="input-group-text">$</span>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <textarea class="form-control" id="urlProducto" placeholder="URL Imagen" aria-label="With textarea"
+                        required></textarea>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="validarYCrearProducto()">Crear</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function formatoPesos(input) {
+            let valor = input.value.replace(/\D/g, '');
+            valor = new Intl.NumberFormat('es-CO').format(valor);
+            input.value = valor;
+        }
+    </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>

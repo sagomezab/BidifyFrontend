@@ -66,6 +66,7 @@
     display: flex;
     align-items: center;
     position: fixed;
+    overflow: hidden !important; 
     top: 0;
   }
   
@@ -383,9 +384,7 @@
   }
   
   /* BUTTON TOP */
-
-    /* ESTILOS PARA EL BOTON */
-    .button-33 {
+.button-33 {
       /* Apariencia general */
       background-color: #505BDA;
       border-radius: 100px;
@@ -410,6 +409,8 @@
       touch-action: manipulation;
   }
   
+    /* ESTILOS PARA EL BOTON */
+    
   .button-33:hover {
     /* Efectos al pasar el mouse */
     background-color: #9168D0; /* Nuevo color al pasar el mouse */
