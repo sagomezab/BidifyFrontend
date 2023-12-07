@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   document.body.classList.add('loaded');
-  const socket = new SockJS('http://bidify-back.azurewebsites.net/stompendpoint');
+  const socket = new SockJS('https://bidify-back.azurewebsites.net/stompendpoint');
   const stompClient2 = Stomp.over(socket);
   const userName = localStorage.getItem('userName');
   var nombreUsuarioSpan = document.getElementById('NombreUuario');
@@ -43,7 +43,7 @@ function crearSubasta() {
 }
 
 function cargarSubastas() {
-  fetch('http://bidify-back.azurewebsites.net/subasta')
+  fetch('https://bidify-back.azurewebsites.net/subasta')
     .then(response => response.json())
     .then(subastas => {
 
@@ -75,7 +75,7 @@ function unirseASubasta(subastaId) {
 }
 
 function cargarProductos() {
-  fetch('http://bidify-back.azurewebsites.net/usuario/productos/todos')
+  fetch('https://bidify-back.azurewebsites.net/usuario/productos/todos')
     .then(response => response.json())
     .then(data => {
       const feedContainer = document.querySelector('.right_row .row.border-radius');
