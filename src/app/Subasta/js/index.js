@@ -23,12 +23,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
       stompClient.subscribe('/topic/subasta/' + subastaId + '/' + userName + '/unirse', function (message) {
         const subastaCreada = JSON.parse(message.body);
-        const participantsTableBody = document.getElementById('participantsTableBody');
-        participantsTableBody.innerHTML = '';
-
-        subasta.oferentes.forEach(participant => {
-          participantsTableBody.innerHTML += `<tr class="align-center" ><td>${participant.nombre}</td></tr>`;
-        });
+        fetch(`http://localhost:8080/subasta/${subastaId}`)
+        .then(response => response.json())
+        .then(subasta => {
+          const participantsTableBody = document.getElementById('participantsTableBody');
+          participantsTableBody.innerHTML = '';
+          subasta.oferentes.forEach(participant => {
+            participantsTableBody.innerHTML += `<tr class="align-center" ><td>${participant.nombre}</td></tr>`;
+          });
+        })
+      .catch(error => console.error('Error al obtener la subasta:', error));
+        
       });
 
       stompClient.subscribe('/topic/subasta/' + subastaId + '/messages', function (message) {
