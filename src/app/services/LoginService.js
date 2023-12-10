@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Realizar una solicitud HTTP para registrar el usuario
         $.ajax({
             type: 'POST',
-            url: 'https://bidify-back.azurewebsites.net/usuario/registrar',
+            url: 'http://20.127.253.105/usuario/registrar',
             contentType: 'application/json',
             data: JSON.stringify({
                 userName: nombreUsuario,
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Realizar una solicitud HTTP para iniciar sesión
         $.ajax({
             type: 'POST',
-            url: 'https://bidify-back.azurewebsites.net/usuario/login',
+            url: 'http://20.127.253.105/usuario/login',
             contentType: 'application/json',
             data: JSON.stringify({
                 userName: nombreUsuarioLogin,
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Realizar una solicitud HTTP para registrar el usuario
         $.ajax({
             type: 'POST',
-            url: 'https://bidify-back.azurewebsites.net/usuario/registrar',
+            url: 'http://20.127.253.105/usuario/registrar',
             contentType: 'application/json',
             data: JSON.stringify({
                 userName: nombreUsuario,
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Realizar una solicitud HTTP para iniciar sesión
         $.ajax({
             type: 'POST',
-            url: 'https://bidify-back.azurewebsites.net/usuario/login',
+            url: 'http://20.127.253.105/usuario/login',
             contentType: 'application/json',
             data: JSON.stringify({
                 userName: nombreUsuarioLogin,
